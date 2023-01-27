@@ -7,19 +7,22 @@ MAINTAINER	Ziko909
 #description about the image
 LABEL	description="this is a simple image that contain a nginx webserv in linux alpine"
 
-# update the apk package manager of alpine and install nginx
-RUN	apk update \
-	&& apk upgrade \
-	&& apk add nginx \
-	&& mkdir /etc/nginx/conf.d
+#add script to binaries to the image fs
+COPY	tools/script.sh /bin
+
+# update apk and install packages and f generate ssl certificate
+RUN	script.sh packages && script.sh ssl
+
+# change the working directory
+WORKDIR	/etc/nginx/
 
 # copy the config files for nginx
-COPY    conf/*  /etc/nginx/
+COPY    conf/*  ./
 
-#mv the vserver1 config to conf.d folder
-RUN     mv /etc/nginx/vserver1.conf /etc/nginx/conf.d && ls /etc/nginx/conf.d
+# mv vservers config files into conf.d folder
+RUN	script.sh config
 
-#copy the test html page
+# copy the test html page
 COPY    html/* /ziko/web/
 
 # run the nginx with PID 1
