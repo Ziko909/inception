@@ -9,4 +9,4 @@ removei :
 	docker image rm $(shell docker image ls --quiet);
 
 run :
-	docker run -itp 3000:80 --name nginx nginx:v1;
+	docker run -itp 3000:443 --name nginx nginx:v1;
