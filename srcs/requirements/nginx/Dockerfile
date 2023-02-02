@@ -7,7 +7,7 @@ MAINTAINER	Ziko909
 #description about the image
 LABEL	description="this is a simple image that contain a nginx webserv in linux alpine"
 
-#add script to binaries to the image fs
+# add script to binaries in the image fs
 COPY	tools/script.sh /bin
 
 # update apk and install packages and f generate ssl certificate
