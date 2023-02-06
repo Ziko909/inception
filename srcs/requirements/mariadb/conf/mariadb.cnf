@@ -1,0 +1,30 @@
+#auter Ziko909
+# config file of mariadb DBSM
+
+# this section is for the server options
+[server]
+# set the error log file
+log_error=/var/log/mysqld/error.log
+
+# set the database directory
+datadir=/var/lib/mysql
+
+# allow the maridb server to use TCP/IP connections
+skip_networking=0
+
+# allow the remote connection
+bind_address=0.0.0.0
+
+# the port number that the server where listen in
+port=3306
+
+# set auto number of openfiles
+autoset_open_files_limit
+
+# set the pid file
+pid_file=/var/run/mysqld/mysqld.pid
+
+# this section is for mariadb client options
+[client]
+# set the port that the client will use to connect into the server
+port=3306
