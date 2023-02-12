@@ -18,9 +18,10 @@ install_packages() {
 }
 
 config() {
-        echo "mv vservers config files to conf.d";
+        echo "mv vserver config file to conf.d";
         mv www.zaabou.42.fr.conf conf.d;
 }
+
 generate_ssl_certificate() {
         echo "generating the certificate ";
 	cd /etc/ssl/;
