@@ -1,0 +1,75 @@
+# Ziko909
+
+# docker compose file for running the application
+
+name: inception
+
+services:
+# nginx service
+ nginx:
+  image: nginx:v1
+  build:
+   context: ./srcs/requirements/nginx
+  env_file: ./.env
+  container_name:  nginx
+  networks:
+   - inception
+  ports:
+   - "443:443"
+  restart: on-failure
+  volumes:
+   - wordpress-volume:/var/www/html
+  depends_on:
+    - wordpress
+
+# wordpress service
+ wordpress:
+   image: wordpress:v1
+   build:
+     context: ./srcs/requirements/wordpress
+   env_file: ./.env
+   container_name: wordpress
+   networks:
+     - inception
+   restart: on-failure
+   volumes:
+     - wordpress-volume:/var/www/html
+   depends_on:
+     - mariadb
+
+# mariadb service
+ mariadb:
+  image: mariadb:v1
+  build:
+   context: ./srcs/requirements/mariadb
+   args:
+     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+     DB_NAME: ${DB_NAME}
+     MYSQL_USER: ${MYSQL_USER}
+     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  env_file: ./.env
+  container_name: mariadb
+  networks:
+   - inception
+  restart: on-failure
+  volumes:
+   - mariadb-volume:/var/lib/mysql
+
+# volumes of the services
+volumes:
+ wordpress-volume:
+  driver_opts:
+   type: ""
+   o: bind
+   device: /home/zaabou/data/wordpress
+ mariadb-volume:
+   driver_opts:
+     type: ""
+     o: bind
+     device: /home/zaabou/data/mariadb
+
+# network of project
+networks:
+ inception:
+  name: inception
+  attachable: false
