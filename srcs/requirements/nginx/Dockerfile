@@ -7,6 +7,9 @@ MAINTAINER	Ziko909
 # description about the image
 LABEL	description="this is a simple image that contains a nginx webserv in linux alpine with custom config"
 
+# the port of the service (nginx)
+EXPOSE	443
+
 # add script to binaries in the image fs
 COPY	tools/script.sh /bin
 
