@@ -21,6 +21,7 @@ services:
    - wordpress-volume:/var/www/html
   depends_on:
     - wordpress
+    - adminer
 
 # wordpress service
  wordpress:
@@ -54,6 +55,21 @@ services:
   restart: on-failure
   volumes:
    - mariadb-volume:/var/lib/mysql
+
+# adminer
+ adminer:
+  image: adminer:v1
+  build:
+    context: ./srcs/requirements/adminer
+  env_file: ./.env
+  container_name: adminer
+  networks:
+    - inception
+  restart: on-failure
+  depends_on:
+    - mariadb
+  volumes:
+    - wordpress-volume:/var/www/html
 
 # volumes of the services
 volumes:
