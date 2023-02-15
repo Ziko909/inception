@@ -24,7 +24,7 @@ install_packages() {
 
 config(){
 	echo "mv the pool config file into php-fpm.d"
-	mv /etc/php7/p1.conf /etc/php7/php-fpm.d
+	mv /etc/php7/wordpress_pool.conf /etc/php7/php-fpm.d
 	echo "creating a log directory"
 	mkdir -p /var/log/php-fpm/
 }
