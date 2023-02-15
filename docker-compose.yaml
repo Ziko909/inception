@@ -71,6 +71,19 @@ services:
   volumes:
     - wordpress-volume:/var/www/html
 
+# static web-site
+ static-site:
+  image: static-site:v1
+  build:
+   context: ./srcs/requirements/static-site
+  env_file: ./.env
+  container_name: static-site
+  networks:
+   - inception
+  ports:
+   - "80:80"
+  restart: on-failure
+
 # volumes of the services
 volumes:
  wordpress-volume:
