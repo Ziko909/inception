@@ -30,7 +30,9 @@ setup(){
 		mysql --user=root -p$MYSQL_ROOT_PASSWORD -e "flush privileges;"
 		mysql --user=root -p$MYSQL_ROOT_PASSWORD -e "create database $DB_NAME";
 		mysql -u root -p$MYSQL_ROOT_PASSWORD -e "create user '$MYSQL_USER'@'wordpress.inception' identified by '$MYSQL_PASSWORD';"
+		mysql -u root -p$MYSQL_ROOT_PASSWORD -e "create user '$MYSQL_USER'@'adminer.inception' identified by '$MYSQL_PASSWORD';"
 		mysql -u root -p$MYSQL_ROOT_PASSWORD -e "grant all privileges on $DB_NAME.* to '$MYSQL_USER'@'wordpress.inception';"
+		mysql -u root -p$MYSQL_ROOT_PASSWORD -e "grant all privileges on $DB_NAME.* to '$MYSQL_USER'@'adminer.inception';"
 		mysql -u root -p$MYSQL_ROOT_PASSWORD -e "flush privileges;"
 		kill -15 -1;
 	fi
