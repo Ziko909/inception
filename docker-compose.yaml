@@ -60,7 +60,7 @@ services:
  adminer:
   image: adminer:v1
   build:
-    context: ./srcs/requirements/adminer
+    context: ./srcs/requirements/bonus/adminer
   env_file: ./.env
   container_name: adminer
   networks:
@@ -75,7 +75,7 @@ services:
  static-site:
   image: static-site:v1
   build:
-   context: ./srcs/requirements/static-site
+   context: ./srcs/requirements/bonus/static-site
   env_file: ./.env
   container_name: static-site
   networks:
@@ -83,6 +83,29 @@ services:
   ports:
    - "80:80"
   restart: on-failure
+
+  # cadvisor
+ cadvisor:
+  image: cadvisor:v1
+  build:
+     context: ./srcs/requirements/bonus/cadvisor
+  env_file: ./.env
+  container_name: cadvisor
+  networks:
+    - inception
+  ports:
+    - "8080:8080"
+  restart: on-failure
+  volumes:
+   - /:/rootfs:ro
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+   - /var/lib/docker/:/var/lib/docker:ro
+   - /dev/disk/:/dev/disk:ro
+  devices:
+   - /dev/kmsg:/dev/kmsg
+  restart: on-failure
+  privileged: true
 
 # volumes of the services
 volumes:
