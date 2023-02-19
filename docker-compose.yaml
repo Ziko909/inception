@@ -37,6 +37,7 @@ services:
      - wordpress-volume:/var/www/html
    depends_on:
      - mariadb
+     - redis
 
 # mariadb service
  mariadb:
@@ -104,8 +105,23 @@ services:
    - /dev/disk/:/dev/disk:ro
   devices:
    - /dev/kmsg:/dev/kmsg
-  restart: on-failure
   privileged: true
+ 
+ # redis
+ redis:
+  image: redis:v1
+  build:
+   context: ./srcs/requirements/bonus/redis
+   args:
+    REDIS_HOST: ${REDIS_HOST}
+    REDIS_PASSWORD: ${REDIS_PASSWORD}
+    REDIS_MAX_MEMORY: ${REDIS_MAX_MEMORY}
+  env_file: ./.env
+  container_name: redis
+  networks:
+   - inception
+  restart: on-failure
+  
 
 # volumes of the services
 volumes:
