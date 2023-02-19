@@ -16,7 +16,7 @@ install_packages() {
 	apk add php7 php7-common php7-session php7-iconv \
 	php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-fpm \
 	php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext \
-	php7-ldap php7-ctype php7-dom php7-simplexml php7-phar mysql-client
+	php7-ldap php7-ctype php7-dom php7-simplexml php7-phar mysql-client php7-pecl-redis php7-tokenizer
 	echo "installing wp-cli"
 	wget -q https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar && mv wp-cli.phar /bin/wp-cli
@@ -38,8 +38,16 @@ run(){
 		&& wp-cli core install --path=$WP_PATH --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_ADMIN_USER \
 		--admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL \
 		--skip-email --allow-root \
+		&& wp-cli config set --path=$WP_PATH 'WP_CACHE_KEY_SALT' 'zaabou.42.fr' --add --allow-root \
+		&& wp-cli config set --path=$WP_PATH 'WP_CACHE' true --raw --add --allow-root \
+		&& wp-cli config set --path=$WP_PATH 'WP_REDIS_HOST' $REDIS_HOST --add --allow-root \
+		&& wp-cli config set --path=$WP_PATH 'WP_REDIS_PORT' $REDIS_PORT --add --allow-root  \
+		&& wp-cli config set --path=$WP_PATH 'WP_REDIS_PASSWORD' $REDIS_PASSWORD --add --allow-root  \
+		&& wp-cli --path=$WP_PATH plugin install redis-cache --activate --allow-root \
+		&& wp-cli --path=$WP_PATH redis enable --allow-root \
 		&& wp-cli user create --path=$WP_PATH --allow-root $WP_USER_LOGIN $WP_USER_EMAIL --role=editor --user_pass=$WP_USER_PASSWORD \
-		--first_name=$WP_USER_FIRST_NAME --last_name=$WP_USER_LAST_NAME
+		--first_name=$WP_USER_FIRST_NAME --last_name=$WP_USER_LAST_NAME \
+
 	fi
 }
 if [ $# -ne 1 ]
