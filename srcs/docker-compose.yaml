@@ -9,7 +9,7 @@ services:
  nginx:
   image: nginx:v1
   build:
-   context: ./srcs/requirements/nginx
+   context: ./requirements/nginx
   env_file: ./.env
   container_name:  nginx
   networks:
@@ -27,7 +27,7 @@ services:
  wordpress:
    image: wordpress:v1
    build:
-     context: ./srcs/requirements/wordpress
+     context: ./requirements/wordpress
    env_file: ./.env
    container_name: wordpress
    networks:
@@ -43,7 +43,7 @@ services:
  mariadb:
   image: mariadb:v1
   build:
-   context: ./srcs/requirements/mariadb
+   context: ./requirements/mariadb
    args:
      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
      DB_NAME: ${DB_NAME}
@@ -61,7 +61,7 @@ services:
  adminer:
   image: adminer:v1
   build:
-    context: ./srcs/requirements/bonus/adminer
+    context: ./requirements/bonus/adminer
   env_file: ./.env
   container_name: adminer
   networks:
@@ -76,7 +76,7 @@ services:
  static-site:
   image: static-site:v1
   build:
-   context: ./srcs/requirements/bonus/static-site
+   context: ./requirements/bonus/static-site
   env_file: ./.env
   container_name: static-site
   networks:
@@ -89,7 +89,7 @@ services:
  cadvisor:
   image: cadvisor:v1
   build:
-     context: ./srcs/requirements/bonus/cadvisor
+     context: ./requirements/bonus/cadvisor
   env_file: ./.env
   container_name: cadvisor
   networks:
@@ -111,7 +111,7 @@ services:
  redis:
   image: redis:v1
   build:
-   context: ./srcs/requirements/bonus/redis
+   context: ./requirements/bonus/redis
    args:
     REDIS_HOST: ${REDIS_HOST}
     REDIS_PASSWORD: ${REDIS_PASSWORD}
@@ -121,7 +121,25 @@ services:
   networks:
    - inception
   restart: on-failure
-  
+
+  # ftp
+ ftp:
+  image: ftp:v1
+  build:
+   context: ./requirements/bonus/ftp
+   args:
+    FTP_USER: ${FTP_USER}
+    FTP_PASSWORD: ${FTP_PASSWORD}
+  env_file: ./.env
+  container_name: ftp
+  networks:
+   - inception
+  ports:
+   - "1024:21"
+  restart: on-failure
+  volumes:
+   - wordpress-volume:/home/${FTP_USER}
+   
 
 # volumes of the services
 volumes:
