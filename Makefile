@@ -7,6 +7,7 @@ GREEN=\e[32m
 BROWN=\e[33m
 Volumes=/home/zaabou/data/*
 NAME=inception
+SRC=./srcs
 
 all: $(NAME)
 
@@ -26,46 +27,46 @@ re: fclean all
 
 build:
 	@echo "${GREEN} Building the images of the application ${DEFAULT}";
-	@docker compose -f docker-compose.yaml build --parallel
+	@docker compose -f $(SRC)/docker-compose.yaml build
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 create:
 	@echo "${GREEN} Creating the containers of the service ${DEFAULT}"
-	@docker compose -f docker-compose.yaml create --force-recreate
+	@docker compose -f $(SRC)/docker-compose.yaml create --force-recreate
 	@rm
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 down:
 	@echo "${GREEN} Remove the project ${DEFAULT}"
-	@docker compose -f docker-compose.yaml down --rmi all -v
+	@docker compose -f $(SRC)/docker-compose.yaml down --rmi all -v
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 images:
 	@echo "${GREEN} show the images of the project ${DEFAULT}"
-	@docker compose -f docker-compose.yaml images
+	@docker compose -f $(SRC)/docker-compose.yaml images
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 ps:
 	@echo "${GREEN} show the containers ${DEFAULT}"
-	@docker compose -f docker-compose.yaml ps
+	@docker compose -f $(SRC)/docker-compose.yaml ps
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 restart:
 	@echo "${GREEN} restart the containers ${DEFAULT}"
-	@docker compose -f docker-compose.yaml restart
+	@docker compose -f $(SRC)/docker-compose.yaml restart
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 start:
 	@echo "${GREEN} start containers ${DEFAULT}"
-	@docker compose -f docker-compose.yaml start
+	@docker compose -f $(SRC)/docker-compose.yaml start
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 stop:
 	@echo "${GREEN} stop containers ${DEFAULT}"
-	@docker compose -f docker-compose.yaml stop
+	@docker compose -f $(SRC)/docker-compose.yaml stop
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
 
 up:
 	@echo "${GREEN} run the service ${DEFAULT}"
-	@docker compose -f docker-compose.yaml up --force-recreate
+	@docker compose -f $(SRC)/docker-compose.yaml up --force-recreate
 	@echo "${GREEN} Done ✅ ${DEFAULT}"
