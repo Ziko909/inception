@@ -5,7 +5,7 @@ FROM	alpine:3.16.4
 MAINTAINER	Ziko909
 
 # description about the image
-LABEL	description="this image contains a fastcgi (php-fpm) for running php scripts with in the server side"
+LABEL	description="This image contains a FastCGI (PHP-FPM) for running PHP scripts on the server side."
 
 # the port of the service (php-fpm)
 EXPOSE	9000
