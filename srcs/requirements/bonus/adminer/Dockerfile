@@ -5,7 +5,7 @@ FROM	alpine:3.16.4
 MAINTAINER	Ziko909
 
 # description about the image
-LABEL	description="this image contains adminer web-based DBMS with php-fpm"
+LABEL	description="This image contains Adminer, a web-based DBMS with PHP-FPM"
 
 # the port of the fast-cgi
 EXPOSE	9000
