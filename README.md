@@ -76,7 +76,7 @@ You can also access my Docker Hub repository and pull the images from there. Her
 - [Redis image](https://hub.docker.com/repository/docker/ziko909/redis/general):This image contains a Redis server to act as a cache for the WordPress website.
 - [Cadviser](https://hub.docker.com/repository/docker/ziko909/cadvisor/general): This image contains cAdvisor for monitoring containers.
 - [Static-site](https://hub.docker.com/repository/docker/ziko909/static-site/general): A lightweight and high-performance web server.
-.
+
   
 ## Helpful Resources
 
