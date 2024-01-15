@@ -5,7 +5,7 @@ FROM    alpine:3.16.4
 MAINTAINER  Ziko909
 
 # description about the image
-LABEL   description="this image contains redis server as cache for the wordpress website"
+LABEL   description="This image contains a Redis server to act as a cache for the WordPress website."
 
 # the port of service (redis)
 EXPOSE  6379
