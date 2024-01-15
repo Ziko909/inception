@@ -5,7 +5,7 @@ FROM    alpine:3.16.4
 MAINTAINER	Ziko909
 
 # description about the image
-LABEL   description="this image contains a simple nginx webserv that serve inception website"
+LABEL   description="A lightweight and high-performance web server."
 
 # the port of the service (static-website)
 EXPOSE  80
