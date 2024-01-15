@@ -5,7 +5,7 @@ FROM    alpine:3.16.4
 MAINTAINER  Ziko909
 
 # description about the image
-LABEL   description="this image contains the cadvisor for monitoring the containers"
+LABEL   description="This image contains cAdvisor for monitoring containers."
 
 # copy script to build env
 COPY    tools/script.sh /bin/script.sh
