@@ -5,7 +5,7 @@ FROM	alpine:3.16.4
 MAINTAINER	Ziko909
 
 # description about the image
-LABEL	description="this is a simple image that contains a nginx webserv in linux alpine with custom config"
+LABEL	description="A lightweight and high-performance web server with custom config"
 
 # the port of the service (nginx)
 EXPOSE	443
