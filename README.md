@@ -98,6 +98,6 @@ You can also access my Docker Hub repository and pull the images from there. Her
 
 ## Contact Information
 
-- GitHub: Ziko909
-- LinkedIn: Zakaria Aabou
+- GitHub: [Ziko909](https://github.com/Ziko909)
+- LinkedIn: [Zakaria Aabou](https://www.linkedin.com/in/zakaria-aabou)
 - Gmail: aabou.zakaria909@gmail.com
